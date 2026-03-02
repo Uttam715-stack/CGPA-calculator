@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 CGPA Calculator</h1>
+            <p>Calculate your Cumulative Grade Point Average easily</p>
+        </div>
+
+        <div class="content">
+            <!-- Grade Info Button -->
+            <div class="controls">
+                <button id="gradeInfoBtn" class="btn-secondary">View Grade Info</button>
+            </div>
+
+            <!-- Subjects Input Form -->
+            <div class="form-section">
+                <h2>Add Subjects</h2>
+                <form id="subjectForm">
+                    <div class="form-group">
+                        <label for="subjectName">Subject Name:</label>
+                        <input type="text" id="subjectName" placeholder="e.g., Mathematics" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="marks">Marks (0-100):</label>
+                            <input type="number" id="marks" min="0" max="100" step="0.1"
+                                   placeholder="85.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="credits">Credits:</label>
+                            <input type="number" id="credits" min="0.1" step="0.1"
+                                   placeholder="3" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Add Subject</button>
+                </form>
+            </div>
+
+            <!-- Subjects Table -->
+            <div class="table-section">
+                <h2>Subjects List</h2>
+                <div class="table-responsive">
+                    <table id="subjectsTable">
+                        <thead>
+                            <tr>
+                                <th>Subject Name</th>
+                                <th>Marks</th>
+                                <th>Grade</th>
+                                <th>Grade Points</th>
+                                <th>Credits</th>
+                                <th>Weighted Points</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr class="empty-row">
+                                <td colspan="7" style="text-align: center; padding: 20px;">
+                                    No subjects added yet
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Calculation Results -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h2>Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Total Credits</div>
+                        <div class="result-value" id="totalCredits">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Total Weighted Points</div>
+                        <div class="result-value" id="totalWeightedPoints">-</div>
+                    </div>
+                    <div class="result-card cgpa-card">
+                        <div class="result-label">CGPA</div>
+                        <div class="result-value cgpa-value" id="cgpa">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <button id="calculateBtn" class="btn-primary">Calculate CGPA</button>
+                <button id="resetBtn" class="btn-danger">Reset All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grade Info Modal -->
+    <div id="gradeModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Grade Mapping Information</h2>
+            <div id="gradeTable" class="grade-table-container"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
